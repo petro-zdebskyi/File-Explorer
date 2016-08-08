@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html ng-app="browserApp">
+<head>
+    <title>Browser</title>
+    <link href="~/Styles/bootstrap.css" rel="stylesheet" />
+    <link href="~/Styles/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container body-content">
+        <div ng-controller="BrowseController">
+            <div class="table-responsive">
+                <table class="table-condensed">
+                    <tr class="my-head-tr">
+                        <td>Less 10Mb</td>
+                        <td>10Mb-50Mb</td>
+                        <td>More 100Mb</td>
+                    </tr>
+                    <tr class="my-body-tr">
+                        <td>{{less10Mb}}</td>
+                        <td>{{more10less50Mb}}</td>
+                        <td>{{more100Mb}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div><b>Current path:&nbsp;</b>{{model.CurrentDirectory.Path}}</div>
+            <div>
+                <a ng-if="model.ParentDirectory" href="" id="{{model.ParentDirectory.Name}}" ng-click='clickToPath("http://localhost:1955/api/browse?path=" + model.ParentDirectory.Path)'>..</a>
+            </div>
+            <div ng-repeat="dir in model.Directories">
+                <a href="" id="{{dir.Name}}" ng-click='clickToPath("http://localhost:1955/api/browse?path=" + dir.Path)'>{{dir.Name}}</a>
+            </div>
+            <div ng-repeat="file in model.Files">
+                <div>{{file.Name}}</div>
+            </div>
+        </div>
+    </div>
+    <script src="@Url.Content("~/Scripts/libs/angular.js")"></script>
+    <script src="@Url.Content("~/Scripts/app/app.js")"></script>
+
+</body>
+</html>
